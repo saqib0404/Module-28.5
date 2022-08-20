@@ -1,14 +1,6 @@
 function getInputFieldValueById(inputFiedlId) {
     const inputField = document.getElementById(inputFiedlId);
     const inputFieldValue = parseFloat(inputField.value);
-    if (inputFieldValue < 0) {
-        alert('Invalid Input');
-        return Math.abs(inputFieldValue);
-    }
-    else if (isNaN(inputFieldValue)) {
-        alert('Invalid Input');
-        // return 0;
-    }
     return inputFieldValue;
 }
 
@@ -23,6 +15,10 @@ document.getElementById('btn-calculate').addEventListener('click', function () {
     const rent = getInputFieldValueById('rent-field');
     const clothesCost = getInputFieldValueById('clothes-cost');
 
+    if ((income || foodCost || rent || clothesCost) < 0 || isNaN(income) || isNaN(foodCost) || isNaN(rent) || isNaN(clothesCost)){
+        alert('Invalid Input');
+        return;
+    } 
     const totalExpenses = foodCost + rent + clothesCost;
     setElementInnerTextById('total-expense', totalExpenses);
 
